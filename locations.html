@@ -1,7 +1,12 @@
 	<div class="col-md-8">
-		<div ng-repeat="location in locations">
-			<div class="location" ng-click="selectLocation(location.id)">
-				<h1>{{location.name}}</h1>
+		<div ng-repeat="location in locations|orderBy:'name'">
+			<div ng-if="location.active == true" class="location" ng-class="{'online': location.active == true}" ng-click="selectLocation(location.id)">
+				<h1><b>Coffee Shop: {{location.name}}</b></h1>
+				<h1>Location: {{location.address}}</h1>
+				<h1 ng-if="location.active == true ">
+					Start Time: {{location.date_started}}
+				</h1>
+
 			</div>
 		</div>
 	</div>
