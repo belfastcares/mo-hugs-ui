@@ -5,30 +5,40 @@ angular.module('mohack', ['ngRoute'])
 		$routeProvider.when('/posts/:id', {templateUrl: 'posts.html', controller: 'PostsController'});
 
 	})
-	.controller('LocationsController',function($scope, ApiService, $location) {
-		
+	.controller('LocationsController',function($scope, ApiService, $location, $timeout) {
 		/*
 		*	Scope property to hold quotes.
 		*/
 		$scope.locations = [];
 		$scope.form = {};
 		$scope.error = false;
+		$scope.val = 0;
 
 		$scope.selectLocation = function(id) {
 				$location.url('/location/IM-HERE/' + id);
 		}
 
 		function getLocations() {
-			ApiService.getLocations()
+			Promise.resolve(ApiService.getLocations())
 				.then(function(data){
-					$scope.locations = data;
+					console.log(data.data);
+					$scope.locations = data.data;
 				})
 		}
 
-		getLocations();
+	    var poll = function() {
+	        $timeout(function() {
+				getLocations();
+	            poll();
+	        }, 1000);
+		};
+	    	   
+   		poll();
+
 	})
 	.controller('LocationsSelectController', function($scope, ApiService, $location, $routeParams){
 		$scope.enterLocation = function() {
+			ApiService.service()
 			$location.url('/posts/' + $routeParams.id);
 		}
 	})
