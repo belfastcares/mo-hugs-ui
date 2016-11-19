@@ -1,0 +1,36 @@
+.body{
+    background-color: white;
+}
+
+.location {
+	padding: 20px;
+	font-size: 40px;
+	height: 400px;
+	background-color: 
+}
+
+#quoteForm {
+	padding: 10px;
+}
+.navWhite {
+		background-color: white;
+		border-bottom: solid 1px #d6d6d6;
+		height: 150px;
+
+}
+
+.background-color {
+	background-color: white;
+}
+.quote {
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.caption {
+    padding: 9px;
+}
+.img {
+    margin: auto;
+}
