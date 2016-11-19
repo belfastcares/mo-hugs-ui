@@ -1,8 +1,12 @@
 <div class="row">
 	<center>
 	<div ng-repeat="post in posts">	
-		<h3>{{post.username}}</h3>
-		<p style="padding-top: 100px;">{{post.message}}</p>
+		<div class="user">
+			<h3>{{post.username}}</h3>
+			<img style="height: 120px;" src="http://wmug.co.uk/utility/anonymous.gif" />
+			<p style="padding-top: 20px;">{{post.message}}</p>
+			<hr style="margin-top: 40px;">
+		</div>
 	</div>
 	</center>
 </div>

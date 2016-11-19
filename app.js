@@ -60,8 +60,8 @@ angular.module('mohack', ['ngRoute'])
 
 	    var poll = function() {
 	        $timeout(function() {
-				getPosts(id);
-	            poll();
+			getPosts(id);
+	           	poll();
 	        }, 1000);
 		};
 

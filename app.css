@@ -45,3 +45,17 @@ h1.imhere {
 .img {
     margin: auto;
 }
+
+.user {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.user h3 {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+
+hr {
+	width: 30%;
+}
