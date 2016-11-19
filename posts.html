@@ -1,8 +1,8 @@
 <div class="row">
 	<center>
-	<form novalidate class="simple-form">
-	    <label>Say Something Nice... <input type="text" ng-model="message" /></label><br />
-	    <input type="submit" ng-click="postMessage(message)" value="Save" />
+	<form class="form-group">
+	    <label>Say Something Nice... <input  class="form-control" type="text" ng-model="message" /></label>
+	    <input style="margin-bottom: 3px;" class="btn btn-default" type="submit" ng-click="postMessage(message)" value="Save" />
     </form>
 
 	<div ng-repeat="post in posts">	
