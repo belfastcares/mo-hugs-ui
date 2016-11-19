@@ -1,10 +1,10 @@
 angular.module('mohack', ['ngRoute'])
 	.config(function ($routeProvider) {
 		$routeProvider.when('/', {templateUrl: 'locations.html', controller: 'LocationsController'});
-
+		$routeProvider.when('/location/IM-HERE/:id', {templateUrl: 'select.html', controller: 'LocationsSelectController'});
 
 	})
-	.controller('LocationsController',function($scope, ApiService) {
+	.controller('LocationsController',function($scope, ApiService, $location) {
 		
 		/*
 		*	Scope property to hold quotes.
@@ -14,7 +14,8 @@ angular.module('mohack', ['ngRoute'])
 		$scope.error = false;
 
 		$scope.selectLocation = function(id) {
-			console.log(id);
+			console.log(id)
+			$location.url('/location/IM-HERE/' + id);
 		}
 		function getLocations() {
 			$scope.locations = ApiService.getLocations();
