@@ -86,7 +86,10 @@ angular.module('mohack', ['ngRoute'])
 
 		$scope.postMessage = function(message) {
 			var username = ApiService.getUsername();
-			Promise.resolve(ApiService.postMessage(id, username, message));
+			Promise.resolve(ApiService.postMessage(id, username, message))
+				.then(function() {
+					document.getElementById("post_form").reset();
+				});
 		}
 
 		poll();
