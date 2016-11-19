@@ -85,7 +85,8 @@ angular.module('mohack', ['ngRoute'])
 		};
 
 		$scope.postMessage = function(message) {
-			ApiService.postMessage(id, message);
+			var username = ApiService.username;
+			ApiService.postMessage(id, username, message);
 		}
 
 		poll();
@@ -116,8 +117,10 @@ angular.module('mohack', ['ngRoute'])
 			return $http.get(QUOTE_API_ROOT + '/CheckIn/' + id);
 		}
 
-		this.postMessage = function(id, message) {
-			return $http.post(QUOTE_API_ROOT + '/Posts/' + id, '{'+message+'}');
+		this.postMessage = function(id, username, message) {
+			
+			var data = { 'username': username, 'message': message } 
+			return $http.post(QUOTE_API_ROOT + '/Posts/' + id, data);
 		}
 		/*
 		* 	Function which gets all of the quotes from the movie quotes api,
