@@ -65,6 +65,8 @@ angular.module('mohack', ['ngRoute'])
 		var id = $routeParams.id;
 		$scope.test = "test";
 
+		$scope.message = '';
+
 		$scope.posts = [];
 
 		function getPosts(id) {
@@ -82,14 +84,16 @@ angular.module('mohack', ['ngRoute'])
 	        }, 1000);
 		};
 
+		$scope.postMessage = function(message) {
+			ApiService.postMessage(id, message);
+		}
+
 		poll();
 
 	})
 	.service('ApiService', function($http, $q) {
 		this.username = '';
-		/*
-		*	Function which generates the omdb api url
-		*/
+
 		var QUOTE_API_ROOT = 'http://mohack.herokuapp.com';
 
 		this.getLocations = function() {
@@ -99,9 +103,7 @@ angular.module('mohack', ['ngRoute'])
 		this.getPosts = function(id) {
 			return $http.get(QUOTE_API_ROOT + '/Posts/' + id);
 		}
-		/*
-		*	Function which generates the omdb api url
-		*/
+
 		this.getUsername = function() {
 			return this.username;
 		}
@@ -114,6 +116,9 @@ angular.module('mohack', ['ngRoute'])
 			return $http.get(QUOTE_API_ROOT + '/CheckIn/' + id);
 		}
 
+		this.postMessage = function(id, message) {
+			return $http.post(QUOTE_API_ROOT + '/Posts/' + id, '{'+message+'}');
+		}
 		/*
 		* 	Function which gets all of the quotes from the movie quotes api,
 		*	and uses the film property of each json object to query the omdb
