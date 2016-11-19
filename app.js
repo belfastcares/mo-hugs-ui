@@ -44,14 +44,25 @@ angular.module('mohack', ['ngRoute'])
 	})
 	.controller('PostsController', function($scope, ApiService, $routeParams) {
 			
-			var id = $routeParams.id;
-			$scope.test = "test";
+		var id = $routeParams.id;
+		$scope.test = "test";
 
-			$scope.posts = [];
+		$scope.posts = [];
 
-			function getPosts(id) {
+		function getPosts(id) {
+			Promise.resolve(ApiService.getPosts())
+				.then(function(data){
+					console.log(data.data);
+					$scope.posts = data.data;
+				})
+		}
 
-			}
+	    var poll = function() {
+	        $timeout(function() {
+				getPosts(id);
+	            poll();
+	        }, 1000);
+		};
 	})
 	.service('ApiService', function($http, $q) {
 		this.username = '';
