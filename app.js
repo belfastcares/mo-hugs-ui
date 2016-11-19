@@ -85,8 +85,8 @@ angular.module('mohack', ['ngRoute'])
 		};
 
 		$scope.postMessage = function(message) {
-			var username = ApiService.username;
-			ApiService.postMessage(id, username, message);
+			var username = ApiService.getUsername();
+			Promise.resolve(ApiService.postMessage(id, username, message));
 		}
 
 		poll();
@@ -118,7 +118,6 @@ angular.module('mohack', ['ngRoute'])
 		}
 
 		this.postMessage = function(id, username, message) {
-			
 			var data = { 'username': username, 'message': message } 
 			return $http.post(QUOTE_API_ROOT + '/Posts/' + id, data);
 		}
