@@ -3,10 +3,14 @@
 			<div class="location" ng-class="{'online': location.active == true}" ng-click="selectLocation(location.id)">
 				<h1><b>Coffee Shop: {{location.name}}</b></h1>
 				<h1>Location: {{location.address}}</h1>
+				<h1 ng-if="location.active == false ">
+					Last Active: {{location.completion_time | date:'dd-MMM-yyyy HH:mm'}}</h1>
 				<h1 ng-if="location.active == true ">
-					Start Time: {{location.date_started}}
-				</h1>
-
+					Start Time: {{location.date_started | date:'dd-MMM-yyyy HH:mm'}}</h1>
+				<h1 ng-if="location.active == true ">
+					End Time: {{location.completion_time | date:'dd-MMM-yyyy HH:mm'}} </h1>
+				<h1 ng-if="location.active == true ">
+					Active Check-ins: {{location.active_users }} </h1>
 			</div>
 		</div>
 	</div>
