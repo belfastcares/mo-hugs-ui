@@ -5,6 +5,19 @@ angular.module('mohack', ['ngRoute'])
 		$routeProvider.when('/posts/:id', {templateUrl: 'posts.html', controller: 'PostsController'});
 
 	})
+	.controller('NavController', function($scope, ApiService, $location, $timeout) {
+		$scope.username = '';
+		function getUsername(){
+			$scope.username = ApiService.getUsername();
+		}
+		var poll = function() {
+	        $timeout(function() {
+				getUsername();
+	            poll();
+	        }, 1000);
+		}; 	   
+   		poll();
+	})
 	.controller('LocationsController',function($scope, ApiService, $location, $timeout) {
 		/*
 		*	Scope property to hold quotes.
@@ -38,9 +51,13 @@ angular.module('mohack', ['ngRoute'])
 	})
 	.controller('LocationsSelectController', function($scope, ApiService, $location, $routeParams){
 		$scope.enterLocation = function() {
-			//.style.background-color = 'green';
 			ApiService.setUserName();
+			ApiService.joinLocation($routeParams.id)
+				.then(function(data) {
+					console.log(data);
+				})
 			$location.url('/posts/' + $routeParams.id);
+
 		}
 	})
 	.controller('PostsController', function($scope, ApiService, $routeParams, $timeout) {
@@ -66,6 +83,7 @@ angular.module('mohack', ['ngRoute'])
 		};
 
 		poll();
+
 	})
 	.service('ApiService', function($http, $q) {
 		this.username = '';
@@ -84,10 +102,18 @@ angular.module('mohack', ['ngRoute'])
 		/*
 		*	Function which generates the omdb api url
 		*/
-		
+		this.getUsername = function() {
+			return this.username;
+		}
+
 		this.setUserName = function() {
 			this.username = 'USER-' + Math.floor(Math.random()*20+1);
 		}
+
+		this.joinLocation = function(id) {
+			return $http.get(QUOTE_API_ROOT + '/CheckIn/' + id);
+		}
+
 		/*
 		* 	Function which gets all of the quotes from the movie quotes api,
 		*	and uses the film property of each json object to query the omdb

@@ -1,14 +1,19 @@
 .body{
     background-color: white;
+    background-image: src('beans.jpg')
 }
 
 .location {
 	padding: 20px;
 	font-size: 40px;
 	height: 400px;
-	background-color: 
 }
 
+.online {
+	background-color: #2ecc71;
+	color: white;
+
+}
 #quoteForm {
 	padding: 10px;
 }
@@ -17,9 +22,9 @@ h1.imhere {
 	padding-top: 200px;
 }
 .navWhite {
-		background-color: white;
-		border-bottom: solid 1px #d6d6d6;
-		height: 150px;
+	background-color: white;
+	border-bottom: solid 1px #d6d6d6;
+	height: 150px;
 
 }
 
