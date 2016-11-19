@@ -38,7 +38,7 @@ angular.module('mohack', ['ngRoute'])
 	})
 	.controller('LocationsSelectController', function($scope, ApiService, $location, $routeParams){
 		$scope.enterLocation = function() {
-			ApiService.service()
+			ApiService.setUserName();
 			$location.url('/posts/' + $routeParams.id);
 		}
 	})
@@ -46,6 +46,8 @@ angular.module('mohack', ['ngRoute'])
 			
 			var id = $routeParams.id;
 			$scope.test = "test";
+
+			$scope.posts = [];
 
 			function getPosts(id) {
 
@@ -59,7 +61,11 @@ angular.module('mohack', ['ngRoute'])
 		var QUOTE_API_ROOT = 'http://mohack.herokuapp.com';
 
 		this.getLocations = function() {
-			return $http.get(QUOTE_API_ROOT + '/GetLocations')
+			return $http.get(QUOTE_API_ROOT + '/GetLocations');
+		}
+
+		this.getPosts = function() {
+			return $http.get(QUOTE_API_ROOT + '/GetLocations');
 		}
 		/*
 		*	Function which generates the omdb api url
@@ -74,62 +80,5 @@ angular.module('mohack', ['ngRoute'])
 	    *	database to retrieve more detailed information about the film
 	   	* 	this data is then appended to each quote object.	
 		*/
-	   	this.getAllQuotes = function() {
-	      	var promises = [];
-	      	var deferredCombinedItems = $q.defer();
-	    	var combinedItems = [];
-	    	var url = null;
-	    	return $http.get(QUOTE_API_ROOT)
-	    		.then(function(res) {
-		     		angular.forEach(res.data, function(quote) {
-		       			var deferredItemList = $q.defer();
-		       			url = generateURL(quote.film);
-		       			$http.get(url).then(function(res) {
-		         			quote.imdb = res.data;
-		            			combinedItems = combinedItems.concat(quote);
-		            			deferredItemList.resolve();
-		         		});         
-		         		promises.push(deferredItemList.promise);
-		        	});
-		        	$q.all(promises).then(function() {
-		          		deferredCombinedItems.resolve(combinedItems);
-		        	});
-		       		return deferredCombinedItems.promise;
-	      		});
-	    }
-
-		/*
-		*	This function has the same funcionality as getAllQuotes
-		*	only one quoute is returned by querying by ID
-		*/   
-	    this.gt = function(id) {
-	   		var url = QUOTE_API_ROOT + '/' + id;
-	   		return $http.get(url)
-	   			.then(function(res) {
-		   			url = generateURL(res.data.film);
-		   			return $http.get(url).then(function(response) {
-		   				var quote = res.data;
-		   				quote.imdb = response.data;
-		   				return quote;
-		   			});
-	   			});
-	    }
-
-		/*
-		*	This function has the same funcionality as getAllQuotes
-		*	only one one random quote is returned.
-		*/   
-	    this.getRandomQuote = function(id) {
-	   		var url = QUOTE_API_ROOT + '/random';
-	   		return $http.get(url)
-	   			.then(function(res) {
-		   			url = generateURL(res.data.film);
-		   			return $http.get(url).then(function(response) {
-		   				var quote = res.data;
-		   				quote.imdb = response.data;
-		   				return quote;
-		   			});
-	   			});
-	    }
-
 	});
+
