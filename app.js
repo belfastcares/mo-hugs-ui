@@ -38,11 +38,12 @@ angular.module('mohack', ['ngRoute'])
 	})
 	.controller('LocationsSelectController', function($scope, ApiService, $location, $routeParams){
 		$scope.enterLocation = function() {
+			//.style.background-color = 'green';
 			ApiService.setUserName();
 			$location.url('/posts/' + $routeParams.id);
 		}
 	})
-	.controller('PostsController', function($scope, ApiService, $routeParams) {
+	.controller('PostsController', function($scope, ApiService, $routeParams, $timeout) {
 			
 		var id = $routeParams.id;
 		$scope.test = "test";
@@ -50,7 +51,7 @@ angular.module('mohack', ['ngRoute'])
 		$scope.posts = [];
 
 		function getPosts(id) {
-			Promise.resolve(ApiService.getPosts())
+			Promise.resolve(ApiService.getPosts(id))
 				.then(function(data){
 					console.log(data.data);
 					$scope.posts = data.data;
@@ -63,6 +64,8 @@ angular.module('mohack', ['ngRoute'])
 	            poll();
 	        }, 1000);
 		};
+
+		poll();
 	})
 	.service('ApiService', function($http, $q) {
 		this.username = '';
@@ -75,8 +78,8 @@ angular.module('mohack', ['ngRoute'])
 			return $http.get(QUOTE_API_ROOT + '/GetLocations');
 		}
 
-		this.getPosts = function() {
-			return $http.get(QUOTE_API_ROOT + '/GetLocations');
+		this.getPosts = function(id) {
+			return $http.get(QUOTE_API_ROOT + '/Posts/' + id);
 		}
 		/*
 		*	Function which generates the omdb api url
