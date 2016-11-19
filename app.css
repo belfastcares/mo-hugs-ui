@@ -64,3 +64,7 @@ h1.imhere {
 hr {
 	width: 30%;
 }
+
+.post_time {
+	font-size: 0.8em;
+}
