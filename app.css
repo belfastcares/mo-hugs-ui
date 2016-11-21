@@ -1,22 +1,38 @@
 .body{
     background-color: white;
+    background-image: src('beans.jpg')
 }
 
 .location {
 	padding: 20px;
 	font-size: 40px;
 	height: 400px;
-	background-color: 
 }
 
+.online {
+	background-color: #2ecc71;
+	color: white;
+
+}
 #quoteForm {
 	padding: 10px;
 }
+h1.imhere {
+	font-size: 100px;
+	padding-top: 200px;
+}
 .navWhite {
-		background-color: white;
-		border-bottom: solid 1px #d6d6d6;
-		height: 150px;
+	background-color: white;
+	border-bottom: solid 1px #d6d6d6;
+	height: 150px;
 
+}
+
+.imhere {
+	height: 600px;
+	width: 600px;
+ 	border-radius: 50%;
+	background-color: #e74c3c;
 }
 
 .background-color {
@@ -33,4 +49,22 @@
 }
 .img {
     margin: auto;
+}
+
+.user {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	font-size: 30px;
+}
+.user h3 {
+	font-weight: bold;
+}
+
+
+hr {
+	width: 30%;
+}
+
+.post_time {
+	font-size: 0.8em;
 }

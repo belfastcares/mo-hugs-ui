@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Movie Quotes</title>
+		<title>Mo Hugs</title>
 		<link rel="stylesheet" type="text/css" href="app.css">
 		<link rel="stylesheet" type="text/css" href="bootstrap.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="app.css">
 	</head>
 	<body ng-app="mohack"  ng-controller="LocationsController" class="body">
-		<nav class="navbar navbar-default navbar-static-top navWhite">
+		<nav class="navbar navbar-default navbar-static-top navWhite"  ng-controller="NavController">
 			<div class="container" style="padding-top: 25px;">
 				<center><img src="mustache.jpg" style="height: 100px;"></center>
-			</div> 
+			</div>
+			<h2>{{username}}</h2> 
 		</nav>
 		<div class="ng-view">
 			
